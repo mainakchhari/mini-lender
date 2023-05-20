@@ -71,3 +71,13 @@ func (e LoanActionNotAllowedError) Error() string {
 func (e LoanActionNotAllowedError) Code() int {
 	return http.StatusNotAcceptable
 }
+
+type LoanStatusUpdateFailedError struct{}
+
+func (e LoanStatusUpdateFailedError) Error() string {
+	return "loan status update failed"
+}
+
+func (e LoanStatusUpdateFailedError) Code() int {
+	return http.StatusInternalServerError
+}

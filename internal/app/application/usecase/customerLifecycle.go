@@ -25,8 +25,8 @@ type LoanDetailResponse struct {
 	Amount       decimal.Decimal `json:"amount"`
 	Status       string          `json:"status"`
 	CreatedDate  time.Time       `json:"created_date"`
-	ApproverID   int             `json:"approver_id"`
-	ApprovedDate time.Time       `json:"approved_date"`
+	ApproverID   *int            `json:"approver_id,omitempty"`
+	ApprovedDate *time.Time      `json:"approved_date,omitempty"`
 }
 
 func ListLoans(args ListLoansArgs) ([]LoanDetailResponse, error) {
@@ -37,15 +37,18 @@ func ListLoans(args ListLoansArgs) ([]LoanDetailResponse, error) {
 	}
 	listLoansResponse := []LoanDetailResponse{}
 	for _, loan := range loans {
-		listLoansResponse = append(listLoansResponse, LoanDetailResponse{
-			ID:           loan.ID,
-			CustomerID:   loan.CustomerID,
-			Amount:       loan.Amount,
-			Status:       string(loan.Status),
-			CreatedDate:  loan.CreatedDate,
-			ApproverID:   loan.ApproverID,
-			ApprovedDate: loan.ApprovedDate,
-		})
+		detail := LoanDetailResponse{
+			ID:          loan.ID,
+			CustomerID:  loan.CustomerID,
+			Amount:      loan.Amount,
+			Status:      string(loan.Status),
+			CreatedDate: loan.CreatedDate,
+		}
+		if loan.ApproverID != 0 {
+			detail.ApproverID = &loan.ApproverID
+			detail.ApprovedDate = &loan.ApprovedDate
+		}
+		listLoansResponse = append(listLoansResponse, detail)
 	}
 	return listLoansResponse, nil
 }
@@ -65,6 +68,7 @@ type ApplyLoanArgs struct {
 	CustomerRepository repository.IUser
 	LoanRepository     repository.ILoan
 	PaymentRepository  repository.IPayment
+	PaymentFactory     factory.IPayment
 }
 
 type ApplyLoanResponse struct {
@@ -88,16 +92,11 @@ func ApplyLoan(args ApplyLoanArgs) (ApplyLoanResponse, errors.BaseError) {
 	if err != nil {
 		return ApplyLoanResponse{}, &errors.LoanApplicationFailedError{}
 	}
-	paymentFactory := factory.Payment{}
-	for _, payment := range paymentFactory.GeneratePaymentsFromLoan(loan, args.NumInstalments) {
+	for _, payment := range args.PaymentFactory.GeneratePaymentsFromLoan(loan, args.NumInstalments) {
 		_, err := args.PaymentRepository.Save(payment)
 		if err != nil {
 			return ApplyLoanResponse{}, &errors.LoanApplicationFailedError{}
 		}
-	}
-	loan, err = args.LoanRepository.Get(loan.ID)
-	if err != nil {
-		return ApplyLoanResponse{}, &errors.LoanNotFoundError{}
 	}
 	return ApplyLoanResponse{
 		LoanID:        loan.ID,
@@ -141,6 +140,24 @@ func MakePayment(args MakePaymentArgs) errors.BaseError {
 	_, err = args.PaymentRepository.Save(payment)
 	if err != nil {
 		return errors.LoanPaymentFailedError{}
+	}
+	//if all payments are paid, update loan status to paid
+	payment, err = args.PaymentRepository.GetNextByLoanId(loans[0].ID)
+	if err != nil {
+		//no more payments left, update loan status to paid
+		loan := domain.Loan{
+			ID:           loans[0].ID,
+			CustomerID:   loans[0].CustomerID,
+			Amount:       loans[0].Amount,
+			Status:       domain.LoanStatusPaid,
+			CreatedDate:  loans[0].CreatedDate,
+			ApproverID:   loans[0].ApproverID,
+			ApprovedDate: loans[0].ApprovedDate,
+		}
+		_, err = args.LoanRepository.Save(loan)
+		if err != nil {
+			return errors.LoanStatusUpdateFailedError{}
+		}
 	}
 	return nil
 }

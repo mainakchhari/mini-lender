@@ -12,21 +12,16 @@ import (
 )
 
 type LoanController struct {
-	userRepository    repository.IUser
-	loanRepository    repository.ILoan
-	paymentRepository repository.IPayment
+	loanRepository repository.ILoan
 }
 
 func SetupLoanRoutes(
 	r *gin.RouterGroup,
 	userRepository repository.IUser,
 	loanRepository repository.ILoan,
-	paymentRepository repository.IPayment,
 ) {
 	ctrl := LoanController{
-		userRepository:    userRepository,
-		loanRepository:    loanRepository,
-		paymentRepository: paymentRepository,
+		loanRepository: loanRepository,
 	}
 	r.PUT(
 		"/:id/action",
@@ -52,11 +47,9 @@ func (ctrl LoanController) actionLoan(c *gin.Context) {
 		return
 	}
 	args := usecase.ActionLoanArgs{
-		ActionLoanUri:      uri,
-		ActionLoanBody:     body,
-		CustomerRepository: ctrl.userRepository,
-		LoanRepository:     ctrl.loanRepository,
-		PaymentRepository:  ctrl.paymentRepository,
+		ActionLoanUri:  uri,
+		ActionLoanBody: body,
+		LoanRepository: ctrl.loanRepository,
 	}
 	err := usecase.ActionLoan(args)
 	if err != nil {

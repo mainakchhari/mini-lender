@@ -14,6 +14,7 @@ const (
 	LoanStatusPending  Status = "PENDING"
 	LoanStatusApproved Status = "APPROVED"
 	LoanStatusRejected Status = "REJECTED"
+	LoanStatusPaid     Status = "PAID"
 
 	// Payment Statuses
 	PayStatusPending Status = "PENDING"

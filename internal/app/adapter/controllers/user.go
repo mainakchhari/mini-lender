@@ -8,6 +8,7 @@ import (
 	"github.com/mainakchhari/mini-lender/internal/app/adapter/middleware"
 	"github.com/mainakchhari/mini-lender/internal/app/application/usecase"
 	"github.com/mainakchhari/mini-lender/internal/app/domain"
+	"github.com/mainakchhari/mini-lender/internal/app/domain/factory"
 	"github.com/mainakchhari/mini-lender/internal/app/domain/repository"
 )
 
@@ -15,6 +16,7 @@ type UserController struct {
 	userRepository    repository.IUser
 	loanRepository    repository.ILoan
 	paymentRepository repository.IPayment
+	paymentFactory    factory.IPayment
 }
 
 func SetupUserRoutes(
@@ -22,11 +24,13 @@ func SetupUserRoutes(
 	userRepository repository.IUser,
 	loanRepository repository.ILoan,
 	paymentRepository repository.IPayment,
+	paymentFactory factory.IPayment,
 ) {
 	ctrl := UserController{
 		userRepository:    userRepository,
 		loanRepository:    loanRepository,
 		paymentRepository: paymentRepository,
+		paymentFactory:    paymentFactory,
 	}
 	// Public Route
 	r.POST(
@@ -117,6 +121,7 @@ func (ctrl UserController) applyLoan(c *gin.Context) {
 		CustomerRepository: ctrl.userRepository,
 		LoanRepository:     ctrl.loanRepository,
 		PaymentRepository:  ctrl.paymentRepository,
+		PaymentFactory:     ctrl.paymentFactory,
 	}
 	order, err := usecase.ApplyLoan(args)
 	if err != nil {

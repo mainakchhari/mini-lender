@@ -7,6 +7,10 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+type IPayment interface {
+	GeneratePaymentsFromLoan(loanEnt domain.Loan, NumInstalments int) []domain.Payment
+}
+
 // Payment is a factory of domain.Payment
 type Payment struct{}
 

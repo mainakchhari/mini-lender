@@ -19,9 +19,7 @@ type ActionLoanBody struct {
 type ActionLoanArgs struct {
 	ActionLoanUri
 	ActionLoanBody
-	CustomerRepository repository.IUser
-	LoanRepository     repository.ILoan
-	PaymentRepository  repository.IPayment
+	LoanRepository repository.ILoan
 }
 
 func ActionLoan(args ActionLoanArgs) errors.BaseError {

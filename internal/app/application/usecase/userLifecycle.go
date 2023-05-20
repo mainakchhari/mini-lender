@@ -59,10 +59,6 @@ func CreateUser(args CreateUserArgs) (CreateUserResponse, errors.BaseError) {
 	if err != nil {
 		return CreateUserResponse{}, errors.UserCreationFailed{}
 	}
-	user, err = args.UserRepository.Get(user.ID)
-	if err != nil {
-		return CreateUserResponse{}, errors.UserNotFoundError{}
-	}
 	return CreateUserResponse{
 		ID:       user.ID,
 		Username: user.Username,
