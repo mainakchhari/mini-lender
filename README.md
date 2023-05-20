@@ -31,10 +31,13 @@ Run all unit tests using `make test`, which will also generate a coverage profil
         │       └── user.go
         ├── application
         │   └── errors                        # Errors
-        │   └── usecase                       # Usecases (Business Logic/Flow)
-        │       └── approverLifecycle.go
-        │       └── customerLifecycle.go
-        │       └── userLifecycle.go
+        │   └── usecase                       # Usecases (Business Logic/Flow) & Testcases
+        │       ├── approverLifecycle.go
+        │       ├── approverLifecycle_test.go
+        │       ├── customerLifecycle.go
+        │       ├── customerLifecycle_test.go
+        │       ├── userLifecycle.go
+        │       └── userLifecycle_test.go
         └── domain
             ├── constants.go                  # Domain constants
             ├── loan.go                       # Entity
