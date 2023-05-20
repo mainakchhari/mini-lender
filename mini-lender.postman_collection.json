@@ -1,0 +1,1281 @@
+{
+	"info": {
+		"_postman_id": "26e59b44-6b50-42c8-8956-e8bff7de2c98",
+		"name": "mini-lender",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9118310"
+	},
+	"item": [
+		{
+			"name": "Register a User [Public]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"chhari\",\n    \"role\": \"Approver\",\n    \"password\": \"example-password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register a Customer [Success]",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"mainak\",\n    \"role\": \"Customer\",\n    \"password\": \"example-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:11:39 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"username\": \"mainak\",\n    \"name\": \"Mainak Chhari\",\n    \"role\": \"Customer\"\n}"
+				},
+				{
+					"name": "Register an Approver [Success]",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"chhari\",\n    \"role\": \"Approver\",\n    \"password\": \"example-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:12:36 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"username\": \"chhari\",\n    \"name\": \"Mainak Chhari\",\n    \"role\": \"Approver\"\n}"
+				},
+				{
+					"name": "Fail on username already exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"chhari\",\n    \"role\": \"Approver\",\n    \"password\": \"example-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:13:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"username already exists\"\n}"
+				},
+				{
+					"name": "Fail on Body Validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"chhari\",\n    \"role\": \"Approver\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:14:25 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "109"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Key: 'CreateUserBody.Password' Error:Field validation for 'Password' failed on the 'required' tag\"\n}"
+				},
+				{
+					"name": "Fail on Invalid Role enum",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mainak Chhari\",\n    \"username\": \"example-user\",\n    \"role\": \"Randomstring\",\n    \"password\": \"example-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "Not Acceptable",
+					"code": 406,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:25:41 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user role invalid\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Apply for a Loan [Customer]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"loan_amount\": 20000,\n    \"num_instalments\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/:uid/loans",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						":uid",
+						"loans"
+					],
+					"variable": [
+						{
+							"key": "uid",
+							"value": "{{user_id}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Apply for a Loan [Success]",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_amount\": 20000,\n    \"num_instalments\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:uid/loans",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:28:57 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "142"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"loan_id\": 1,\n    \"customer_id\": 1,\n    \"loan_amount\": \"20000\",\n    \"num_instalments\": 5,\n    \"status\": \"PENDING\",\n    \"created_date\": \"2023-05-20T03:58:57.83561152+05:30\"\n}"
+				},
+				{
+					"name": "Fail on Body Validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_amount\": \"mainak\",\n    \"num_instalments\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:31:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"error decoding string 'mainak': can't convert mainak to decimal\"\n}"
+				},
+				{
+					"name": "Fail on User not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_amount\": 20000,\n    \"num_instalments\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:35:57 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user not found\"\n}"
+				},
+				{
+					"name": "Fail on non authorized user id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_amount\": 20000,\n    \"num_instalments\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 00:20:25 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Forbidden route access\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Approve/Reject a Pending Loan [Approver]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"action\": \"APPROVED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/loans/:id/action",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"loans",
+						":id",
+						"action"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{loan_id}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Approve a Pending Loan [Success]",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"APPROVED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/:id/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								":id",
+								"action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{loan_id}}"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:42:44 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Reject a Pending Loan [Success]",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"REJECTED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/:id/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								":id",
+								"action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:45:39 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Fail on RBAC",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"APPROVED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/:id/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								":id",
+								"action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{loan_id}}"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:41:04 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Forbidden\"\n}"
+				},
+				{
+					"name": "Fail on Invalid Action enum",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"randomstring\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/:id/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								":id",
+								"action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "Not Acceptable",
+					"code": 406,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:47:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						}
+					],
+					"cookie": [],
+					"body": "\"loan action not allowed\""
+				},
+				{
+					"name": "Fail when loan status is not PENDING",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"APPROVED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/:id/action",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								":id",
+								"action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{loan_id}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:50:48 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						}
+					],
+					"cookie": [],
+					"body": "\"loan is not pending\""
+				}
+			]
+		},
+		{
+			"name": "List all Applied Loans [Customer]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/:uid/loans",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						":uid",
+						"loans"
+					],
+					"variable": [
+						{
+							"key": "uid",
+							"value": "{{user_id}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Fetch all loans for user(customer) id [Success]",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 22:53:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "554"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"loan_id\": 1,\n        \"customer_id\": 1,\n        \"amount\": \"20000\",\n        \"status\": \"APPROVED\",\n        \"created_date\": \"2023-05-20T03:58:57.83561152+05:30\",\n        \"approver_id\": 0,\n        \"approved_date\": \"2023-05-20T04:12:44.742904229+05:30\"\n    },\n    {\n        \"loan_id\": 2,\n        \"customer_id\": 1,\n        \"amount\": \"20000\",\n        \"status\": \"REJECTED\",\n        \"created_date\": \"2023-05-20T04:00:13.613931578+05:30\",\n        \"approver_id\": 0,\n        \"approved_date\": \"2023-05-20T04:15:39.047029903+05:30\"\n    },\n    {\n        \"loan_id\": 3,\n        \"customer_id\": 1,\n        \"amount\": \"20000\",\n        \"status\": \"PENDING\",\n        \"created_date\": \"2023-05-20T04:02:31.726396079+05:30\",\n        \"approver_id\": 0,\n        \"approved_date\": \"0001-01-01T00:00:00Z\"\n    }\n]"
+				},
+				{
+					"name": "Fail on non authorized user id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 May 2023 23:59:54 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Forbidden route access\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Make Payment for Loan [Customer]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 5000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/:uid/loans/:lid/pay",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						":uid",
+						"loans",
+						":lid",
+						"pay"
+					],
+					"variable": [
+						{
+							"key": "uid",
+							"value": "{{user_id}}"
+						},
+						{
+							"key": "lid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Make Payment for Loan [Success]",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id/loans/:lid/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"loans",
+								":lid",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{user_id}}"
+								},
+								{
+									"key": "lid",
+									"value": "{{loan_id}}"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 00:56:17 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Fail when loan (id) not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id/loans/:lid/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"loans",
+								":lid",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{user_id}}"
+								},
+								{
+									"key": "lid",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 00:56:53 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"loan not found\"\n}"
+				},
+				{
+					"name": "Fail on non authorized user id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id/loans/:lid/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"loans",
+								":lid",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								},
+								{
+									"key": "lid",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 00:57:30 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Forbidden route access\"\n}"
+				},
+				{
+					"name": "Fail when no payment pending",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans/:lid/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans",
+								":lid",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "{{user_id}}"
+								},
+								{
+									"key": "lid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 00:59:44 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"payment not found\"\n}"
+				},
+				{
+					"name": "Fail on Body Validation",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"mainak\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:uid/loans/:lid/pay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":uid",
+								"loans",
+								":lid",
+								"pay"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "{{user_id}}"
+								},
+								{
+									"key": "lid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 May 2023 01:09:38 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"error decoding string 'mainak': can't convert mainak to decimal\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "mainak"
+		},
+		{
+			"key": "password",
+			"value": "example-password",
+			"type": "string"
+		},
+		{
+			"key": "loan_id",
+			"value": "loan_id"
+		},
+		{
+			"key": "user_id",
+			"value": "1"
+		}
+	]
+}
